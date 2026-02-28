@@ -13,10 +13,9 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
-**Context:** This should be run in a dedicated worktree (created by brainstorming skill).
+**Context:** This should be run in a dedicated worktree (created by brainstorming skill). Read the relevant spec files before writing the plan. Look for specs in `docs/specs/` or check CLAUDE.md for the specs location. If no specs directory can be found, ask the user where specs are located.
 
-**Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
-- (User preferences for plan location override this default)
+**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
 
 ## Scope Check
 
@@ -51,6 +50,10 @@ This structure informs the task decomposition. Each task should produce self-con
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+**Specs:** [Links to relevant spec files in docs/specs/, e.g. [architecture.md](../specs/architecture.md), [auth.md](../specs/auth.md)]
+
+**Spec changes:** [What changed in the specs that this plan implements — the delta]
+
 **Goal:** [One sentence describing what this builds]
 
 **Architecture:** [2-3 sentences about approach]
@@ -59,6 +62,10 @@ This structure informs the task decomposition. Each task should produce self-con
 
 ---
 ```
+
+Plans implement **changes to specs**. Read the relevant spec files to understand what needs to be built. The plan should cover only the delta — what changed in the specs — not re-implement already existing functionality.
+
+Specs define the *what* (types, interfaces, contracts). Plans define the *how* (implementation code, exact commands, file changes). If a spec includes types or interfaces, the plan should implement them — not redefine them.
 
 ## Task Structure
 
@@ -135,7 +142,7 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 After saving the plan, offer execution choice:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Two execution options:**
+**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
 
 **1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
 
